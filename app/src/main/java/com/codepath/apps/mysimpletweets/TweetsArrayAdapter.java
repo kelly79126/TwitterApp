@@ -10,8 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.codepath.apps.mysimpletweets.models.Tweet;
-import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -38,14 +38,15 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
 
         ImageView ivProfileImage = (ImageView) convertView.findViewById(R.id.ivProfile);
         TextView tvUserName = (TextView) convertView.findViewById(R.id.tvUserName);
-        TextView tvBody = (TextView) convertView.findViewById(R.id.tvBody);
+        com.codepath.apps.mysimpletweets.LinkifiedTextView tvBody = (com.codepath.apps.mysimpletweets.LinkifiedTextView) convertView.findViewById(R.id.tvBody);
         TextView tvScreenName = (TextView) convertView.findViewById(R.id.tvScreenName);
         TextView tvRelativeTime = (TextView) convertView.findViewById(R.id.tvRelativeTime);
 
         tvUserName.setText(tweet.getUser().getName());
         tvBody.setText(tweet.getBody());
         ivProfileImage.setImageResource(android.R.color.transparent);
-        Picasso.with(getContext()).load(tweet.getUser().getProfileImageUrl()).into(ivProfileImage);
+        //Picasso.with(getContext()).load(tweet.getUser().getProfileImageUrl()).into(ivProfileImage);
+        Glide.with(getContext()).load(tweet.getUser().getProfileImageUrl()).into(ivProfileImage);
         tvScreenName.setText("@" + tweet.getUser().getScreenName());
         tvRelativeTime.setText(getRelativeTimeAgo(tweet.getCreatedAt()));
 

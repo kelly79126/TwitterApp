@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/vg_user_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/item_margin"
+        android:layout_marginTop="@dimen/item_margin"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <ImageView
+            android:id="@+id/ivDetailProfile"
+            android:layout_width="@dimen/profile_image_width"
+            android:layout_height="@dimen/profile_image_height"
+            android:layout_marginRight="@dimen/item_margin"
+            android:background="@color/colorWhite"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_toRightOf="@+id/ivDetailProfile"
+            android:layout_toEndOf="@+id/ivDetailProfile"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/item_margin">
+            <TextView
+                android:id="@+id/tvDetailUserName"
+                tools:text="Kelly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/detail_name_text_size"/>
+
+            <TextView
+                android:id="@+id/tvDetailScreenName"
+                tools:text="\@kelly79126"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvUserName"
+                android:layout_toRightOf="@+id/ivDetailProfile"
+                android:layout_toEndOf="@+id/ivDetailProfile" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvDetailBody"
+        android:text="Body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBlack"
+        android:autoLink="all"
+        android:linksClickable="true"
+        android:layout_marginTop="@dimen/item_margin"
+        android:textSize="@dimen/body_text_size"
+        android:layout_below="@+id/vg_user_info"
+        android:layout_alignLeft="@+id/vg_user_info"
+        android:layout_alignStart="@+id/vg_user_info" />
+
+    <ImageView
+        android:id="@+id/ivMediaImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvDetailBody"
+        android:layout_marginTop="@dimen/big_margin"
+        android:layout_below="@+id/tvDetailBody"/>
+
+    <TextView
+        android:id="@+id/tvDetailRelativeTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="9h"
+        android:layout_alignLeft="@+id/tvDetailBody"
+        android:layout_below="@+id/tvDetailBody"
+        android:layout_marginTop="@dimen/big_margin" />
+</RelativeLayout>

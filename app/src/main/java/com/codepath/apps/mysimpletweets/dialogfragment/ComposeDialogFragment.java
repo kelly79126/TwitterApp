@@ -24,6 +24,7 @@ public class ComposeDialogFragment extends DialogFragment implements Button.OnCl
     TextView tvCharacterCount;
     Button btnSave;
     Button btnCancel;
+    public static final int CHARACTER_LIMIT = 140;
 
     public interface ComposeDialogListener {
         void onFinishComposeDialog(String status);
@@ -49,8 +50,7 @@ public class ComposeDialogFragment extends DialogFragment implements Button.OnCl
 
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             //This sets a textview to the current length
-            //Log.d("Kelly", " " + s.length() );
-            tvCharacterCount.setText(String.valueOf(140 - s.length()));
+            tvCharacterCount.setText(String.valueOf(CHARACTER_LIMIT - s.length()));
         }
 
         public void afterTextChanged(Editable s) {

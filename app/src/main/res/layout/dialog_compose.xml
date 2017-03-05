@@ -6,55 +6,60 @@
 
     <EditText
         android:id="@+id/et_status"
-        android:layout_width="500dp"
+        android:layout_width="@dimen/dialog_width"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:maxLength="140"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="50dp"
-        android:textSize="20sp"
+        android:layout_marginLeft="@dimen/big_margin"
+        android:layout_marginTop="@dimen/big_margin"
+        android:textSize="@dimen/detail_name_text_size"
         android:background="@android:color/transparent"
-        android:hint="What's happening?"/>
+        android:hint="@string/hint_compose_type"/>
 
     <View
         android:id="@+id/v_line"
-        android:layout_width="500dp"
+        android:layout_width="@dimen/dialog_width"
         android:layout_height="1dp"
         android:layout_below="@+id/et_status"
-        android:layout_marginTop="200dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@color/colorTextBlack">
+        android:layout_marginTop="@dimen/line_height"
+        android:layout_marginLeft="@dimen/item_margin"
+        android:layout_marginRight="@dimen/item_margin"
+        android:background="@color/colorGray">
     </View>
 
     <TextView
         android:id="@+id/tv_character_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginTop="@dimen/big_margin"
+        android:layout_marginRight="@dimen/big_margin"
         android:layout_below="@+id/v_line"
         android:layout_toLeftOf="@+id/btn_cancel"
-        android:textSize="20sp"
-        android:text="140"/>
+        android:textSize="@dimen/detail_name_text_size"
+        android:text="@string/character_limit"/>
 
     <Button
         android:id="@+id/btn_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="@dimen/item_margin"
+        android:layout_marginBottom="@dimen/item_margin"
         android:layout_below="@+id/v_line"
         android:layout_alignRight="@+id/v_line"
-        android:text="Save" />
+        android:text="@string/tweet"
+        android:textColor="@color/colorWhite"
+        android:background="@color/customThemeColor" />
 
     <Button
         android:id="@+id/btn_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/item_margin"
+        android:layout_marginRight="@dimen/item_margin"
         android:layout_below="@+id/v_line"
         android:layout_toLeftOf="@+id/btn_save"
-        android:text="Cancel" />
+        android:text="@string/cancel"
+        android:background="@color/customThemeColor"
+        android:textColor="@color/colorWhite" />
 </RelativeLayout>

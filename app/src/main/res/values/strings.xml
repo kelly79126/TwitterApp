@@ -6,4 +6,8 @@
     <string name="title_activity_photos">Home Timeline</string>
     <string name="title_activity_timeline">TimelineActivity</string>
 
+    <string name="hint_compose_type">What is happening?</string>
+    <string name="tweet">tweet</string>
+    <string name="cancel">cancel</string>
+    <string name="character_limit">140</string>
 </resources>

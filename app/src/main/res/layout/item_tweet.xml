@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:descendantFocusability="blocksDescendants"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/ivProfile"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/profile_image_width"
+        android:layout_height="@dimen/profile_image_height"
         android:layout_marginLeft="@dimen/item_margin"
         android:layout_marginTop="@dimen/item_margin"
         android:layout_alignParentLeft="true"
@@ -24,7 +25,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textColor="@color/colorTextBlack"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/tweet_name_text_size"
         android:layout_toRightOf="@+id/ivProfile"
         android:layout_toEndOf="@+id/ivProfile"
         android:layout_alignTop="@+id/ivProfile"
@@ -32,19 +34,20 @@
 
     <TextView
         android:id="@+id/tvScreenName"
-        android:text="\@kelly79126"
+        tools:text="\@kelly79126"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/tvUserName"
         android:layout_alignTop="@+id/ivProfile"/>
 
-    <TextView
+    <com.codepath.apps.mysimpletweets.LinkifiedTextView
         android:id="@+id/tvBody"
-        android:text="Body"
+        tools:text="Body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorTextBlack"
+        android:textColor="@color/colorBlack"
         android:layout_marginTop="@dimen/item_margin"
+        android:autoLink="all"
         android:layout_toRightOf="@+id/ivProfile"
         android:layout_below="@+id/tvUserName"/>
 
@@ -57,6 +60,6 @@
         android:layout_alignParentEnd="true"
         android:layout_marginRight="@dimen/item_margin"
         android:layout_marginEnd="@dimen/item_margin"
-        android:text="9h" />
+        tools:text="9h" />
 
 </RelativeLayout>
