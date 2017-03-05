@@ -1,10 +1,14 @@
-package com.codepath.apps.mysimpletweets;
+package com.codepath.apps.mysimpletweets.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
 
+import com.codepath.apps.mysimpletweets.R;
+import com.codepath.apps.mysimpletweets.TwitterClient;
 import com.codepath.oauth.OAuthLoginActionBarActivity;
 
 public class LoginActivity extends OAuthLoginActionBarActivity<TwitterClient> {
@@ -27,16 +31,18 @@ public class LoginActivity extends OAuthLoginActionBarActivity<TwitterClient> {
 	// i.e Display application "homepage"
 	@Override
 	public void onLoginSuccess() {
-		Toast.makeText(this, "Success", Toast.LENGTH_LONG);
-//		 Intent i = new Intent(this, TimelineActivity.class);
-//		 startActivity(i);
+		Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
+		Log.d("Kelly", "Success");
+		Intent i = new Intent(this, TimelineActivity.class);
+		startActivity(i);
 	}
 
 	// OAuth authentication flow failed, handle the error
 	// i.e Display an error dialog or toast
 	@Override
 	public void onLoginFailure(Exception e) {
-		Toast.makeText(this, "Fail", Toast.LENGTH_LONG);
+		Toast.makeText(this, "Fail", Toast.LENGTH_LONG).show();
+		Log.d("Kelly", "Fail");
 		e.printStackTrace();
 	}
 
