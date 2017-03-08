@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.codepath.oauth.OAuthBaseClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import org.scribe.builder.api.Api;
@@ -68,5 +69,15 @@ public class TwitterClient extends OAuthBaseClient {
 		params.put("status", status);
 
 		getClient().post(apiUrl, params, handler);
+	}
+
+	public void getMentionsTimeLine(long maxId, JsonHttpResponseHandler handler) {
+		String apiUrl = getApiUrl("statuses/mentions_timeline.json");
+		RequestParams params = new RequestParams();
+		params.put("count", TWEETS_COUNT_ONE_TIME);
+		if(maxId > -1) {
+			params.put("max_id", maxId);
+		}
+		getClient().get(apiUrl, params, handler);
 	}
 }

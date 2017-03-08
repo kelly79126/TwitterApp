@@ -1,4 +1,4 @@
-package com.codepath.apps.mysimpletweets.dialogfragment;
+package com.codepath.apps.mysimpletweets.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
