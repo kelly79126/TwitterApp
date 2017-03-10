@@ -1,25 +1,25 @@
 package com.codepath.apps.mysimpletweets.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.codepath.apps.mysimpletweets.R;
+import com.codepath.apps.mysimpletweets.SmartFragmentStatePagerAdapter;
 import com.codepath.apps.mysimpletweets.fragments.ComposeDialogFragment;
 import com.codepath.apps.mysimpletweets.fragments.HomeTimelineFragment;
 import com.codepath.apps.mysimpletweets.fragments.MentionsTimelineFragment;
-import com.codepath.apps.mysimpletweets.fragments.TweetsListFragment;
 
 public class TimelineActivity extends AppCompatActivity implements ComposeDialogFragment.ComposeDialogListener{
 
-    private TweetsListFragment fragmnetTweetsList;
-
+    ViewPager vpPager;
 //    private SwipeRefreshLayout swipeContainer;
 
 
@@ -29,14 +29,13 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         setContentView(R.layout.activity_timeline);
 
         // get viewpager
-        ViewPager vpPager = (ViewPager) findViewById(R.id.viewpager);
+        vpPager = (ViewPager) findViewById(R.id.viewpager);
         // set the viewpager adapter for the pager
         vpPager.setAdapter(new TweetsPagerAdapter(getSupportFragmentManager()));
         // find the sliding tabstrip
         PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         // attach the tabstrip to the viewer
         tabStrip.setViewPager(vpPager);
-
 
 //        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.activity_timeline);
 //        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -88,9 +87,9 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
 //        client.getHomeTimeLine(-1, new JsonHttpResponseHandler() {
 //            @Override
 //            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-////                fragmnetTweetsList.clear();
-//                fragmnetTweetsList.addAll(Tweet.fromJsonArray(response));
-////                fragmnetTweetsList.notifyDataSetChanged();
+////                homeTimelineFragment.clear();
+//                homeTimelineFragment.addAll(Tweet.fromJsonArray(response));
+////                homeTimelineFragment.notifyDataSetChanged();
 ////                swipeContainer.setRefreshing(false);
 //            }
 //
@@ -101,6 +100,11 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
 //        });
 //    }
 
+    public void onProfileView(MenuItem item) {
+        // launch a profile view
+        Intent i = new Intent(this, ProfileActivity.class);
+        startActivity(i);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -130,28 +134,19 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
 
     @Override
     public void onFinishComposeDialog(String status) {
-//        updateStatus(status);
+//        HomeTimelineFragment homeFragment = (HomeTimelineFragment) getSupportFragmentManager().findFragmentByTag("twitterHomePage");
+//        if(null != homeFragment) {
+//            homeFragment.updateStatus(status);
+//        }else{
+//            Log.e("Kelly", "it is null");
+//        }
+        TweetsPagerAdapter tweetsPagerAdapter = (TweetsPagerAdapter) vpPager.getAdapter();
+        HomeTimelineFragment homeFragment = (HomeTimelineFragment) tweetsPagerAdapter.getRegisteredFragment(0);
+        homeFragment.updateStatus(status);
     }
 
-
-
-//    private void updateStatus(String status) {
-//        client.updateStatus(status, new JsonHttpResponseHandler() {
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-////                aTweets.insert(Tweet.fromJson(response), 0);
-////                aTweets.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-//                Log.d("DEBUG", errorResponse.toString());
-//            }
-//        });
-//    }
-
     //return the order of the fragment in the view pager
-    public class TweetsPagerAdapter extends FragmentPagerAdapter {
+    public class TweetsPagerAdapter extends SmartFragmentStatePagerAdapter {
         private String tabTitles[] = {"Home", "Mentions"};
 
         //Adapter gets the manager insert or remove fragment from activity
@@ -162,7 +157,11 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         //The order and creation of fragments within the pager
         @Override
         public Fragment getItem(int position) {
+            Log.e("Kelly", "getItem TEST");
             if(position ==0){
+//                HomeTimelineFragment homeFragment = new HomeTimelineFragment();
+//                getSupportFragmentManager().beginTransaction().add(homeFragment, "twitterHomePageXX").commit();
+//                return homeFragment;
                 return new HomeTimelineFragment();
             }else if(position ==1){
                 return new MentionsTimelineFragment();
@@ -180,8 +179,6 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         public int getCount() {
             return tabTitles.length;
         }
-
-
     }
 
 }

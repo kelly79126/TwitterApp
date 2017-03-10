@@ -19,10 +19,10 @@ import java.util.List;
  * Created by kelly79126 on 2017/3/7.
  */
 
-public class TweetsListFragment extends Fragment{
-    private ArrayList<Tweet> tweets;
-    private TweetsArrayAdapter aTweets;
-    private ListView lvTweets;
+public abstract class TweetsListFragment extends Fragment{
+    public ArrayList<Tweet> tweets;
+    public TweetsArrayAdapter aTweets;
+    public ListView lvTweets;
 
     //inflation logic
     @Nullable
@@ -31,8 +31,18 @@ public class TweetsListFragment extends Fragment{
         View v = inflater.inflate(R.layout.fragment_tweets_list, parent, false);
         lvTweets = (ListView) v.findViewById(R.id.lvTweets);
         lvTweets.setAdapter(aTweets);
+
+        lvTweets.setOnScrollListener(new com.codepath.apps.mysimpletweets.EndlessScrollListener() {
+            @Override
+            public boolean onLoadMore(int page, int totalItemsCount) {
+                loadMoreItem();
+                return true;
+            }
+        });
         return v;
     }
+
+    public abstract void loadMoreItem();
 
     //create lifecycle event
     @Override

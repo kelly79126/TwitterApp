@@ -15,6 +15,10 @@ public class User implements Parcelable {
     public long uid;
     public String screenName;
     public String profileImageUrl;
+    private String taglines;
+    private int followersCount;
+    private int followingsCount;
+
 
     // empty constructor needed by the Parceler library
     public User() {
@@ -25,6 +29,9 @@ public class User implements Parcelable {
         uid = in.readLong();
         screenName = in.readString();
         profileImageUrl = in.readString();
+        taglines = in.readString();
+        followersCount = in.readInt();
+        followingsCount = in.readInt();
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
@@ -55,6 +62,18 @@ public class User implements Parcelable {
         return profileImageUrl;
     }
 
+    public String getTaglines() {
+        return taglines;
+    }
+
+    public int getFollowersCount() {
+        return followersCount;
+    }
+
+    public int getFollowingsCount() {
+        return followingsCount;
+    }
+
     public static User fromJson(JSONObject json) {
         User u = new User();
 
@@ -63,6 +82,9 @@ public class User implements Parcelable {
             u.uid = json.getLong("id");
             u.screenName = json.getString("screen_name");
             u.profileImageUrl = json.getString("profile_image_url");
+            u.taglines = json.getString("description");
+            u.followersCount = json.getInt("followers_count");
+            u.followingsCount = json.getInt("friends_count");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -81,5 +103,8 @@ public class User implements Parcelable {
         dest.writeLong(uid);
         dest.writeString(screenName);
         dest.writeString(profileImageUrl);
+        dest.writeString(taglines);
+        dest.writeInt(followersCount);
+        dest.writeInt(followingsCount);
     }
 }

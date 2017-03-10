@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_profile"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.codepath.apps.mysimpletweets.activities.ProfileActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/rlUserHeader">
+
+        <ImageView
+            android:id="@+id/ivProfile"
+            android:layout_width="@dimen/profile_image_width"
+            android:layout_height="@dimen/profile_image_height"
+            android:layout_marginLeft="@dimen/item_margin"
+            android:layout_marginTop="@dimen/item_margin"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginRight="@dimen/item_margin"
+            android:background="@color/colorWhite"/>
+
+        <TextView
+            android:id="@+id/tvUserName"
+            android:text="Kelly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/tweet_name_text_size"
+            android:layout_toRightOf="@+id/ivProfile"
+            android:layout_toEndOf="@+id/ivProfile"
+            android:layout_alignTop="@+id/ivProfile"
+            android:layout_marginRight="@dimen/item_margin"/>
+
+        <TextView
+            android:id="@+id/tvTagline"
+            tools:text="\@kelly79126"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvUserName"
+            android:layout_alignLeft="@+id/tvUserName"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llCounts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@+id/rlUserHeader"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvFollowers"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            tools:text="5 Followers"/>
+
+        <TextView
+            android:id="@+id/tvFollowing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            tools:text="5 Following"/>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/llCounts"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/flContainer">
+
+    </FrameLayout>
+</RelativeLayout>

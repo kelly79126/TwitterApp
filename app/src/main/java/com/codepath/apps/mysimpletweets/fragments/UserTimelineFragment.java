@@ -1,11 +1,7 @@
 package com.codepath.apps.mysimpletweets.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.codepath.apps.mysimpletweets.TwitterApplication;
 import com.codepath.apps.mysimpletweets.TwitterClient;
@@ -18,10 +14,10 @@ import org.json.JSONObject;
 import cz.msebera.android.httpclient.Header;
 
 /**
- * Created by kelly79126 on 2017/3/7.
+ * Created by kelly79126 on 2017/3/9.
  */
 
-public class HomeTimelineFragment extends TweetsListFragment{
+public class UserTimelineFragment extends TweetsListFragment {
     private TwitterClient client;
 
     @Override
@@ -31,17 +27,12 @@ public class HomeTimelineFragment extends TweetsListFragment{
         populateTimeline(-1);
     }
 
-    public static HomeTimelineFragment newInstance() {
-        HomeTimelineFragment frag = new HomeTimelineFragment();
+    public static UserTimelineFragment newInstance(String screenName) {
+        UserTimelineFragment frag = new UserTimelineFragment();
         Bundle args = new Bundle();
+        args.putString("screen_name", screenName);
         frag.setArguments(args);
         return frag;
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, parent, savedInstanceState);
     }
 
     @Override
@@ -50,8 +41,8 @@ public class HomeTimelineFragment extends TweetsListFragment{
     }
 
     private void populateTimeline(long maxId) {
-        Log.d("Kelly", "maxId: " + maxId);
-        client.getHomeTimeLine(maxId, new JsonHttpResponseHandler() {
+        String screenName = getArguments().getString("screen_anme");
+        client.getUserTimeLine(screenName, maxId, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 addAll(Tweet.fromJsonArray(response));
@@ -64,21 +55,4 @@ public class HomeTimelineFragment extends TweetsListFragment{
             }
         });
     }
-
-    public void updateStatus(String status) {
-        client.updateStatus(status, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                aTweets.insert(Tweet.fromJson(response), 0);
-                aTweets.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                Log.d("DEBUG", errorResponse.toString());
-            }
-        });
-    }
-
-
 }

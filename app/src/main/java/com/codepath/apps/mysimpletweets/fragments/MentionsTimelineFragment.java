@@ -27,6 +27,11 @@ public class MentionsTimelineFragment extends TweetsListFragment {
         populateTimeline(-1);
     }
 
+    @Override
+    public void loadMoreItem() {
+        populateTimeline(aTweets.getItem(aTweets.getCount()-1).getUid() - 1);
+    }
+
     private void populateTimeline(long maxId) {
         client.getMentionsTimeLine(maxId, new JsonHttpResponseHandler() {
             @Override
