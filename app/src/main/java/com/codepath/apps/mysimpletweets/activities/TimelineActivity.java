@@ -13,13 +13,24 @@ import android.view.MenuItem;
 import com.astuetz.PagerSlidingTabStrip;
 import com.codepath.apps.mysimpletweets.R;
 import com.codepath.apps.mysimpletweets.SmartFragmentStatePagerAdapter;
+import com.codepath.apps.mysimpletweets.TwitterApplication;
+import com.codepath.apps.mysimpletweets.TwitterClient;
 import com.codepath.apps.mysimpletweets.fragments.ComposeDialogFragment;
 import com.codepath.apps.mysimpletweets.fragments.HomeTimelineFragment;
 import com.codepath.apps.mysimpletweets.fragments.MentionsTimelineFragment;
+import com.codepath.apps.mysimpletweets.models.User;
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.json.JSONObject;
+import org.parceler.Parcels;
+
+import cz.msebera.android.httpclient.Header;
 
 public class TimelineActivity extends AppCompatActivity implements ComposeDialogFragment.ComposeDialogListener{
 
     ViewPager vpPager;
+    TwitterClient client;
+    User user;
 //    private SwipeRefreshLayout swipeContainer;
 
 
@@ -53,18 +64,6 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
 //                android.R.color.holo_orange_light,
 //                android.R.color.holo_red_light);
 //
-//
-//        lvTweets = (ListView) findViewById(R.id.lvTweets);
-//        tweets = new ArrayList<>();
-//        aTweets = new TweetsArrayAdapter(this, tweets);
-//        lvTweets.setAdapter(aTweets);
-//        lvTweets.setOnScrollListener(new EndlessScrollListener() {
-//            @Override
-//            public boolean onLoadMore(int page, int totalItemsCount) {
-//                populateTimeline(aTweets.getItem(aTweets.getCount()-1).getUid() - 1);
-//                return true;
-//            }
-//        });
 //        setListViewListener();
     }
 
@@ -102,8 +101,18 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
 
     public void onProfileView(MenuItem item) {
         // launch a profile view
-        Intent i = new Intent(this, ProfileActivity.class);
-        startActivity(i);
+        client = TwitterApplication.getRestClient();
+
+        client.getUserInfo(new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                Log.d("Kelly", response.toString());
+                user = User.fromJson(response);
+                Intent i = new Intent(TimelineActivity.this, ProfileActivity.class);
+                i.putExtra("user", Parcels.wrap(user));
+                startActivity(i);
+            }
+        });
     }
 
     @Override
@@ -134,12 +143,6 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
 
     @Override
     public void onFinishComposeDialog(String status) {
-//        HomeTimelineFragment homeFragment = (HomeTimelineFragment) getSupportFragmentManager().findFragmentByTag("twitterHomePage");
-//        if(null != homeFragment) {
-//            homeFragment.updateStatus(status);
-//        }else{
-//            Log.e("Kelly", "it is null");
-//        }
         TweetsPagerAdapter tweetsPagerAdapter = (TweetsPagerAdapter) vpPager.getAdapter();
         HomeTimelineFragment homeFragment = (HomeTimelineFragment) tweetsPagerAdapter.getRegisteredFragment(0);
         homeFragment.updateStatus(status);
@@ -159,9 +162,6 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         public Fragment getItem(int position) {
             Log.e("Kelly", "getItem TEST");
             if(position ==0){
-//                HomeTimelineFragment homeFragment = new HomeTimelineFragment();
-//                getSupportFragmentManager().beginTransaction().add(homeFragment, "twitterHomePageXX").commit();
-//                return homeFragment;
                 return new HomeTimelineFragment();
             }else if(position ==1){
                 return new MentionsTimelineFragment();

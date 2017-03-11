@@ -24,6 +24,10 @@ import cz.msebera.android.httpclient.Header;
 public class HomeTimelineFragment extends TweetsListFragment{
     private TwitterClient client;
 
+    public interface ClickOtherProfileListener {
+        void onClickOtherProfile(String status);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +46,7 @@ public class HomeTimelineFragment extends TweetsListFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
         return super.onCreateView(inflater, parent, savedInstanceState);
+
     }
 
     @Override

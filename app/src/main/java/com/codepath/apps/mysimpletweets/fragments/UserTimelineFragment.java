@@ -28,6 +28,7 @@ public class UserTimelineFragment extends TweetsListFragment {
     }
 
     public static UserTimelineFragment newInstance(String screenName) {
+        Log.d("Kelly", screenName);
         UserTimelineFragment frag = new UserTimelineFragment();
         Bundle args = new Bundle();
         args.putString("screen_name", screenName);
@@ -41,7 +42,8 @@ public class UserTimelineFragment extends TweetsListFragment {
     }
 
     private void populateTimeline(long maxId) {
-        String screenName = getArguments().getString("screen_anme");
+        String screenName = getArguments().getString("screen_name");
+        Log.d("Kelly", "in populate " + screenName);
         client.getUserTimeLine(screenName, maxId, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {

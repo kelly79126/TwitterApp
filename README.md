@@ -2,7 +2,7 @@
 
 **MySimpleTweets** is an android app that allows a user to view home and mentions timelines, view user profiles with user timelines, as well as compose and post a new tweet. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public).
 
-Time spent: **7.5** hours spent in total
+Time spent: **9** hours spent in total
 
 ## User Stories
 
@@ -14,9 +14,9 @@ The following **required** functionality is completed:
   * [V] User can view the recent mentions of their username.
 * [V] User can navigate to **view their own profile**
   * [V] User can see picture, tagline, # of followers, # of following, and tweets on their profile.
-* [ ] User can **click on the profile image** in any tweet to see **another user's** profile.
- * [ ] User can see picture, tagline, # of followers, # of following, and tweets of clicked user.
- * [ ] Profile view includes that user's timeline
+* [V] User can **click on the profile image** in any tweet to see **another user's** profile.
+ * [V] User can see picture, tagline, # of followers, # of following, and tweets of clicked user.
+ * [V] Profile view includes that user's timeline
 * [V] User can [infinitely paginate](http://guides.codepath.com/android/Endless-Scrolling-with-AdapterViews-and-RecyclerView) any of these timelines (home, mentions, user) by scrolling to the bottom
 
 The following **optional** features are implemented:
@@ -28,7 +28,7 @@ The following **optional** features are implemented:
   * [ ] The user that wrote the original tweet is automatically "@" replied in compose
 * [ ] User can click on a tweet to be **taken to a "detail view"** of that tweet
  * [ ] User can take favorite (and unfavorite) or retweet actions on a tweet
-* [ ] Improve the user interface and theme the app to feel twitter branded
+* [V] Improve the user interface and theme the app to feel twitter branded
 * [ ] User can **search for tweets matching a particular query** and see results
 * [ ] Usernames and hashtags are styled and clickable within tweets [using clickable spans](http://guides.codepath.com/android/Working-with-the-TextView#creating-clickable-styled-spans)
 

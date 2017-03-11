@@ -23,12 +23,13 @@ public abstract class TweetsListFragment extends Fragment{
     public ArrayList<Tweet> tweets;
     public TweetsArrayAdapter aTweets;
     public ListView lvTweets;
+    public View v;
 
     //inflation logic
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_tweets_list, parent, false);
+        v = inflater.inflate(R.layout.fragment_tweets_list, parent, false);
         lvTweets = (ListView) v.findViewById(R.id.lvTweets);
         lvTweets.setAdapter(aTweets);
 

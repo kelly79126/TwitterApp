@@ -15,9 +15,9 @@ public class User implements Parcelable {
     public long uid;
     public String screenName;
     public String profileImageUrl;
-    private String taglines;
-    private int followersCount;
-    private int followingsCount;
+    public String taglines;
+    public int followersCount;
+    public int followingsCount;
 
 
     // empty constructor needed by the Parceler library

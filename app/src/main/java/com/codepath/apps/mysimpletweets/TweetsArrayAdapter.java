@@ -1,6 +1,7 @@
 package com.codepath.apps.mysimpletweets;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
@@ -11,7 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.codepath.apps.mysimpletweets.activities.ProfileActivity;
 import com.codepath.apps.mysimpletweets.models.Tweet;
+
+import org.parceler.Parcels;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,10 +31,18 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
         super(context, 0, tweets);
     }
 
+    private ClickProfileListener listener;
+
+    public interface ClickProfileListener {
+        // These methods are the different events and
+        // need to pass relevant arguments related to the event triggered
+        public void onObjectReady(String title);
+    }
+
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Tweet tweet = getItem(position);
+        final Tweet tweet = getItem(position);
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_tweet, parent, false);
@@ -45,13 +57,26 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
         tvUserName.setText(tweet.getUser().getName());
         tvBody.setText(tweet.getBody());
         ivProfileImage.setImageResource(android.R.color.transparent);
-        //Picasso.with(getContext()).load(tweet.getUser().getProfileImageUrl()).into(ivProfileImage);
         Glide.with(getContext()).load(tweet.getUser().getProfileImageUrl()).into(ivProfileImage);
         tvScreenName.setText("@" + tweet.getUser().getScreenName());
         tvRelativeTime.setText(getRelativeTimeAgo(tweet.getCreatedAt()));
 
+        ivProfileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(getContext(), ProfileActivity.class);
+                intent.putExtra("user", Parcels.wrap(tweet.getUser()));
+                v.getContext().startActivity(intent);
+            }
+        });
         return convertView;
     }
+
+    // Assign the listener implementing events interface that will receive the events
+    public void setCustomObjectListener(ClickProfileListener listener) {
+        this.listener = listener;
+    }
+
 
     // getRelativeTimeAgo("Mon Apr 01 21:16:23 +0000 2014");
     public String getRelativeTimeAgo(String rawJsonDate) {

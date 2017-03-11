@@ -11,58 +11,65 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.codepath.apps.mysimpletweets.R;
-import com.codepath.apps.mysimpletweets.TwitterApplication;
-import com.codepath.apps.mysimpletweets.TwitterClient;
 import com.codepath.apps.mysimpletweets.fragments.UserTimelineFragment;
 import com.codepath.apps.mysimpletweets.models.User;
-import com.loopj.android.http.JsonHttpResponseHandler;
 
-import org.json.JSONObject;
-
-import cz.msebera.android.httpclient.Header;
+import org.parceler.Parcels;
 
 public class ProfileActivity extends AppCompatActivity {
-    TwitterClient client;
+//    TwitterClient client;
     User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        client = TwitterApplication.getRestClient();
 
-        client.getUserInfo(new JsonHttpResponseHandler(){
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+        user = (User) Parcels.unwrap(getIntent().getParcelableExtra("user"));
 
-                Log.d("Kelly", response.toString());
-                user = User.fromJson(response);
-                getSupportActionBar().setTitle("@" + user.getScreenName());
-                populateProfileHeader(user);
-            }
-        });
-
-        String screenName = getIntent().getStringExtra("screen_name");
         if(savedInstanceState == null) {
-            UserTimelineFragment fragmentUserTimeline = UserTimelineFragment.newInstance(screenName);
+            UserTimelineFragment fragmentUserTimeline = UserTimelineFragment.newInstance(user.screenName);
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.flContainer, fragmentUserTimeline);
             ft.commit();
         }
+
+        getSupportActionBar().setTitle("@" + user.screenName);
+        populateProfileHeader(user);
+
+//        client = TwitterApplication.getRestClient();
+
+//        client.getUserInfo(new JsonHttpResponseHandler(){
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                Log.d("Kelly", response.toString());
+//                user = User.fromJson(response);
+//                getSupportActionBar().setTitle("@" + user.screenName);
+//                populateProfileHeader(user);
+//            }
+//        });
+
     }
 
     private void populateProfileHeader(User user) {
+
+        Log.d("Kelly", user.screenName);
+        Log.d("Kelly", user.taglines);
+        Log.d("Kelly", ""+user.followersCount);
+        Log.d("Kelly", ""+user.followingsCount);
+
+
         TextView tvName = (TextView) findViewById(R.id.tvUserName);
         TextView tvTagline = (TextView) findViewById(R.id.tvTagline);
         TextView tvFollowers = (TextView) findViewById(R.id.tvFollowers);
         TextView tvFollingers = (TextView) findViewById(R.id.tvFollowing);
         ImageView ivProfile = (ImageView) findViewById(R.id.ivProfile);
 
-        tvName.setText(user.getName());
-        tvTagline.setText(user.getTaglines());
-        tvFollowers.setText(user.getFollowersCount() + " Followers");
-        tvFollingers.setText(user.getFollowingsCount() + " Following");
-        Glide.with(this).load(user.getProfileImageUrl()).into(ivProfile);
+        tvName.setText(user.name);
+        tvTagline.setText(user.taglines);
+        tvFollowers.setText(user.followersCount + " Followers");
+        tvFollingers.setText(user.followingsCount + " Following");
+        Glide.with(this).load(user.profileImageUrl).into(ivProfile);
     }
 
     @Override
