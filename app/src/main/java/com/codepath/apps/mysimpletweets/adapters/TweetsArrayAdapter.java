@@ -1,4 +1,4 @@
-package com.codepath.apps.mysimpletweets;
+package com.codepath.apps.mysimpletweets.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,8 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.codepath.apps.mysimpletweets.R;
 import com.codepath.apps.mysimpletweets.activities.ProfileActivity;
 import com.codepath.apps.mysimpletweets.models.Tweet;
+import com.codepath.apps.mysimpletweets.widgets.LinkifiedTextView;
 
 import org.parceler.Parcels;
 
@@ -50,7 +52,7 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
 
         ImageView ivProfileImage = (ImageView) convertView.findViewById(R.id.ivProfile);
         TextView tvUserName = (TextView) convertView.findViewById(R.id.tvUserName);
-        com.codepath.apps.mysimpletweets.LinkifiedTextView tvBody = (com.codepath.apps.mysimpletweets.LinkifiedTextView) convertView.findViewById(R.id.tvBody);
+        LinkifiedTextView tvBody = (LinkifiedTextView) convertView.findViewById(R.id.tvBody);
         TextView tvScreenName = (TextView) convertView.findViewById(R.id.tvScreenName);
         TextView tvRelativeTime = (TextView) convertView.findViewById(R.id.tvRelativeTime);
 

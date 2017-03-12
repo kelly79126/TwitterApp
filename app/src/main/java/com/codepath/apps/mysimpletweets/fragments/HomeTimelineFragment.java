@@ -7,8 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.codepath.apps.mysimpletweets.TwitterApplication;
-import com.codepath.apps.mysimpletweets.TwitterClient;
+import com.codepath.apps.mysimpletweets.widgets.TwitterApplication;
+import com.codepath.apps.mysimpletweets.widgets.TwitterClient;
 import com.codepath.apps.mysimpletweets.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -84,6 +84,5 @@ public class HomeTimelineFragment extends TweetsListFragment{
             }
         });
     }
-
 
 }

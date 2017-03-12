@@ -2,6 +2,7 @@ package com.codepath.apps.mysimpletweets.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -9,12 +10,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.codepath.apps.mysimpletweets.R;
-import com.codepath.apps.mysimpletweets.SmartFragmentStatePagerAdapter;
-import com.codepath.apps.mysimpletweets.TwitterApplication;
-import com.codepath.apps.mysimpletweets.TwitterClient;
+import com.codepath.apps.mysimpletweets.adapters.SmartFragmentStatePagerAdapter;
+import com.codepath.apps.mysimpletweets.widgets.TwitterApplication;
+import com.codepath.apps.mysimpletweets.widgets.TwitterClient;
 import com.codepath.apps.mysimpletweets.fragments.ComposeDialogFragment;
 import com.codepath.apps.mysimpletweets.fragments.HomeTimelineFragment;
 import com.codepath.apps.mysimpletweets.fragments.MentionsTimelineFragment;
@@ -31,6 +33,8 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
     ViewPager vpPager;
     TwitterClient client;
     User user;
+
+
 //    private SwipeRefreshLayout swipeContainer;
 
 
@@ -47,6 +51,13 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         // attach the tabstrip to the viewer
         tabStrip.setViewPager(vpPager);
+
+        FloatingActionButton myFab = (FloatingActionButton) findViewById(R.id.fab);
+        myFab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                showComposeDialog();
+            }
+        });
 
 //        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.activity_timeline);
 //        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -106,7 +117,6 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         client.getUserInfo(new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                Log.d("Kelly", response.toString());
                 user = User.fromJson(response);
                 Intent i = new Intent(TimelineActivity.this, ProfileActivity.class);
                 i.putExtra("user", Parcels.wrap(user));
@@ -120,19 +130,6 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_timeline, menu);
         return true;
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle presses on the action bar items
-        switch (item.getItemId()) {
-            case R.id.miCompose:
-                showComposeDialog();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     private void showComposeDialog() {
@@ -180,5 +177,4 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
             return tabTitles.length;
         }
     }
-
 }

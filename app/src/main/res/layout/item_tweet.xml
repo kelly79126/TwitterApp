@@ -43,7 +43,7 @@
         android:layout_toRightOf="@+id/tvUserName"
         android:layout_alignTop="@+id/ivProfile"/>
 
-    <com.codepath.apps.mysimpletweets.LinkifiedTextView
+    <com.codepath.apps.mysimpletweets.widgets.LinkifiedTextView
         android:id="@+id/tvBody"
         tools:text="Body"
         android:layout_width="wrap_content"

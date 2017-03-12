@@ -49,7 +49,7 @@
         android:layout_alignRight="@+id/v_line"
         android:text="@string/tweet"
         android:textColor="@color/colorWhite"
-        android:background="@color/customThemeColor" />
+        android:background="@color/colorPrimary" />
 
     <Button
         android:id="@+id/btn_cancel"
@@ -60,6 +60,6 @@
         android:layout_below="@+id/v_line"
         android:layout_toLeftOf="@+id/btn_save"
         android:text="@string/cancel"
-        android:background="@color/customThemeColor"
+        android:background="@color/colorPrimary"
         android:textColor="@color/colorWhite" />
 </RelativeLayout>

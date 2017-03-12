@@ -2,7 +2,7 @@
 
 **MySimpleTweets** is an android app that allows a user to view home and mentions timelines, view user profiles with user timelines, as well as compose and post a new tweet. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public).
 
-Time spent: **9** hours spent in total
+Time spent: **10** hours spent in total
 
 ## User Stories
 
@@ -41,11 +41,12 @@ The following **bonus** features are implemented:
 
 The following **additional** features are implemented:
 
-* [ ] List anything else that you can get done to improve the app functionality!
+* [V] Move the "Compose" action to a [FloatingActionButton](https://github.com/codepath/android_guides/wiki/Floating-Action-Buttons) instead of on the AppBar.
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
+[Link to Video Walkthrough](https://www.dropbox.com/s/11ep38u1v4oxda9/HW4.mp4?dl=0)
 
 
 ## Notes
